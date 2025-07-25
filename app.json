@@ -1,0 +1,30 @@
+{
+  "name": "AutoFeedback",
+  "description": "Telegram Feedback Bot hosted on Heroku",
+  "repository": "https://github.com/RockMusicBot/Autofeedback-",
+  "env": {
+    "BOT_TOKEN": {
+      "description": "Your bot token from @BotFather",
+      "required": true
+    },
+    "CHANNEL_ID": {
+      "description": "Your channel or group ID (e.g., -1001234567890)",
+      "required": true
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [],
+  "scripts": {
+    "postdeploy": "echo Bot deployed successfully!"
+  }
+}
