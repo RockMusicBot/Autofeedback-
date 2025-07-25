@@ -1,5 +1,11 @@
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
+from telegram.ext import (
+    ApplicationBuilder,
+    CommandHandler,
+    MessageHandler,
+    ContextTypes,
+    filters
+)
 from datetime import datetime
 import os
 
@@ -61,25 +67,44 @@ async def handle_media(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
     if update.message.photo:
-        await context.bot.send_photo(chat_id=CHANNEL_ID, photo=update.message.photo[-1].file_id, caption=caption, parse_mode='Markdown')
+        await context.bot.send_photo(
+            chat_id=CHANNEL_ID, 
+            photo=update.message.photo[-1].file_id, 
+            caption=caption, 
+            parse_mode='Markdown'
+        )
     elif update.message.document:
-        await context.bot.send_document(chat_id=CHANNEL_ID, document=update.message.document.file_id, caption=caption, parse_mode='Markdown')
+        await context.bot.send_document(
+            chat_id=CHANNEL_ID, 
+            document=update.message.document.file_id, 
+            caption=caption, 
+            parse_mode='Markdown'
+        )
     elif update.message.video:
-        await context.bot.send_video(chat_id=CHANNEL_ID, video=update.message.video.file_id, caption=caption, parse_mode='Markdown')
+        await context.bot.send_video(
+            chat_id=CHANNEL_ID, 
+            video=update.message.video.file_id, 
+            caption=caption, 
+            parse_mode='Markdown'
+        )
 
     await update.message.reply_text("✅ Media forwarded!")
 
 def main():
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("help", help_command))
-    app.add_handler(CommandHandler("feedback", handle_feedback))
+    # Create the Application
+    application = ApplicationBuilder().token(BOT_TOKEN).build()
 
+    # Add handlers
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("help", help_command))
+    application.add_handler(CommandHandler("feedback", handle_feedback))
+
+    # Media handler
     media_filter = filters.PHOTO | filters.VIDEO | filters.Document.ALL
-    app.add_handler(MessageHandler(media_filter, handle_media))
+    application.add_handler(MessageHandler(media_filter, handle_media))
 
     print("🤖 Feedback Bot is running...")
-    app.run_polling()
+    application.run_polling()
 
 if __name__ == "__main__":
     main()
