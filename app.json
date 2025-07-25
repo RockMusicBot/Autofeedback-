@@ -1,7 +1,7 @@
 {
   "name": "AutoFeedback",
-  "description": "Telegram Feedback Bot hosted on Heroku",
-  "repository": "https://github.com/RockMusicBot/Autofeedback-",
+  "description": "Telegram Feedback Bot",
+  "repository": "https://github.com/YOUR_USERNAME/YOUR_REPO",
   "env": {
     "BOT_TOKEN": {
       "description": "Your bot token from @BotFather",
