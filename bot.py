@@ -3,8 +3,9 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, Con
 from datetime import datetime
 import os
 
+# Load environment variables
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-CHANNEL_ID = os.getenv("CHANNEL_ID")
+CHANNEL_ID = int(os.getenv("CHANNEL_ID"))  # Must be an integer
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -28,6 +29,7 @@ async def handle_feedback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     feedback_text = ' '.join(context.args)
     sender = update.effective_user
+    chat_type = update.effective_chat.type
     sender_name = sender.full_name
     username = f"@{sender.username}" if sender.username else "No username"
     time_sent = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -35,6 +37,7 @@ async def handle_feedback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = (
         f"📩 *New Feedback Received!*\n"
         f"👤 *From:* {sender_name} ({username})\n"
+        f"💬 *Chat Type:* {chat_type}\n"
         f"🕒 *Time:* `{time_sent}`\n\n"
         f"💬 *Feedback:*\n{feedback_text}"
     )
@@ -44,6 +47,7 @@ async def handle_feedback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def handle_media(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sender = update.effective_user
+    chat_type = update.effective_chat.type
     sender_name = sender.full_name
     username = f"@{sender.username}" if sender.username else "No username"
     time_sent = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -51,6 +55,7 @@ async def handle_media(update: Update, context: ContextTypes.DEFAULT_TYPE):
     caption = (
         f"📩 *New Media Feedback!*\n"
         f"👤 *From:* {sender_name} ({username})\n"
+        f"💬 *Chat Type:* {chat_type}\n"
         f"🕒 *Time:* `{time_sent}`\n\n"
         f"🖼️ Media attached."
     )
@@ -69,8 +74,10 @@ def main():
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(CommandHandler("feedback", handle_feedback))
+
     media_filter = filters.PHOTO | filters.VIDEO | filters.Document.ALL
     app.add_handler(MessageHandler(media_filter, handle_media))
+
     print("🤖 Feedback Bot is running...")
     app.run_polling()
 
