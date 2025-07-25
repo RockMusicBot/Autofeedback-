@@ -67,3 +67,6 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Configure your environment variables (edit .env or config.py)
+nano .env
+# To start bot
+python3 bot.py
