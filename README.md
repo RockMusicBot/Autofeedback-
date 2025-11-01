@@ -9,8 +9,8 @@
 </p>
 
 <p align="center">
-  <a href="https://t.me/KomalBotsNetwork"><img src="https://img.shields.io/badge/Update%20Channel-blue?style=for-the-badge&logo=telegram&logoColor=white" alt="Update Channel"></a>
-  <a href="https://t.me/KomalMusicRobotSupport"><img src="https://img.shields.io/badge/Support%20Group-blue?style=for-the-badge&logo=telegram&logoColor=white" alt="Support Group"></a>
+  <a href="https://t.me/TheKomalBots"><img src="https://img.shields.io/badge/Update%20Channel-blue?style=for-the-badge&logo=telegram&logoColor=white" alt="Update Channel"></a>
+  <a href="https://t.me/KomalBotSupport"><img src="https://img.shields.io/badge/Support%20Group-blue?style=for-the-badge&logo=telegram&logoColor=white" alt="Support Group"></a>
   <a href="https://t.me/ItsKapilYadav"><img src="https://img.shields.io/badge/Owner-KapilYadav-purple?style=for-the-badge&logo=telegram&logoColor=white" alt="Owner"></a>
 </p>
 
